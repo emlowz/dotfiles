@@ -1,0 +1,10 @@
+# curl configuration managed by chezmoi.
+
+# Make failures visible without hiding the underlying error.
+--show-error
+
+# Prefer a compact progress display for interactive use.
+--progress-bar
+
+# Preserve the remote file modification time when saving downloads.
+--remote-time
