@@ -1,4 +1,4 @@
-# NetHack configuration managed by chezmoi.
+# NetHack configuration
 
 # General quality-of-life options.
 OPTIONS=color,hilite_pet,lit_corridor,showexp,showscore,time
