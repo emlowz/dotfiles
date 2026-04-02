@@ -1,0 +1,66 @@
+#!/bin/sh
+
+convert=1
+subtitles=0
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --no-convert)
+      convert=0
+      shift
+      ;;
+    with-subtitles | with-subs | subs)
+      subtitles=1
+      shift
+      ;;
+    help | --help | -h)
+      cat <<'EOF'
+usage:
+  yt [--no-convert] [yt-dlp options] URL...
+  yt [--no-convert] with-subtitles [yt-dlp options] URL...
+
+options:
+  --no-convert     Keep the old MKV behavior instead of making MP4 output.
+
+subcommands:
+  with-subtitles   Download English subtitles when available and embed them.
+EOF
+      exit 0
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ "$convert" -eq 1 ]; then
+  if [ "$subtitles" -eq 1 ]; then
+    exec yt-dlp \
+      --preset-alias mp4 \
+      --recode-video mp4 \
+      --write-subs \
+      --sub-langs 'en.*,en,-live_chat' \
+      --sub-format best \
+      --embed-subs \
+      "$@"
+  fi
+
+  exec yt-dlp \
+    --preset-alias mp4 \
+    --recode-video mp4 \
+    "$@"
+fi
+
+if [ "$subtitles" -eq 1 ]; then
+  exec yt-dlp \
+    --preset-alias mkv \
+    --write-subs \
+    --sub-langs 'en.*,en,-live_chat' \
+    --sub-format best \
+    --embed-subs \
+    "$@"
+fi
+
+exec yt-dlp \
+  --preset-alias mkv \
+  "$@"

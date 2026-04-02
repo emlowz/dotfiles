@@ -1,0 +1,41 @@
+# NetHack configuration
+
+# General quality-of-life options.
+OPTIONS=color,hilite_pet,lit_corridor,showdamage,showexp,showscore,time
+OPTIONS=autopickup,pickup_types:$!?/=+,pickup_burden:burdened
+OPTIONS=autoopen,autounlock:apply-key,rest_on_space,safe_pet,safe_wait,sortpack,sortloot:loot,verbose
+OPTIONS=menucolors,mouse_support
+OPTIONS=msghistory:200,msg_window:reversed
+
+# Make menus and prompts easier to read.
+OPTIONS=menustyle:combination,menu_objsyms:both
+
+# Helpful map feedback added in newer NetHack releases.
+OPTIONS=mention_decor,mention_map
+
+# Autopickup rules: grab useful basics, skip noisy low-value items
+AUTOPICKUP_EXCEPTION=">corpse"
+AUTOPICKUP_EXCEPTION=">glob"
+AUTOPICKUP_EXCEPTION=">worthless piece of colored glass"
+
+# Highlight important status fields
+OPTIONS=statushilites:10
+OPTIONS=hilite_status:hitpoints/100%/gray&normal
+OPTIONS=hilite_status:hitpoints/<100%/green&normal
+OPTIONS=hilite_status:hitpoints/<66%/yellow&normal
+OPTIONS=hilite_status:hitpoints/<50%/orange&normal
+OPTIONS=hilite_status:hitpoints/<33%/red&bold
+OPTIONS=hilite_status:hitpoints/<15%/red&inverse
+OPTIONS=hilite_status:hitpoints/criticalhp/red&inverse
+OPTIONS=hilite_status:power/<33%/yellow&normal
+OPTIONS=hilite_status:carrying-capacity/burdened/yellow/stressed/orange/strained/red/overtaxed/red&bold/overloaded/red&inverse
+OPTIONS=hilite_status:hunger/satiated/yellow/hungry/orange/weak/red/fainting/red&bold
+OPTIONS=hilite_status:condition/major_troubles/red&inverse/minor_troubles/yellow/movement/cyan
+OPTIONS=hilite_status:armor-class/down/green/up/red
+OPTIONS=hilite_status:characteristics/up/green/down/red
+
+# Highlight item quality in menus
+MENUCOLOR=" blessed " = green
+MENUCOLOR=" holy water" = green
+MENUCOLOR=" cursed " = red
+MENUCOLOR=" unholy water" = red

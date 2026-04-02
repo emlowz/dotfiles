@@ -1,0 +1,15 @@
+# Global fd ignore patterns.
+.DS_Store
+.git/
+.jj/
+.next/
+.nuxt/
+.pnpm-store/
+.svelte-kit/
+.terraform/
+.venv/
+coverage/
+dist/
+node_modules/
+target/
+tmp/

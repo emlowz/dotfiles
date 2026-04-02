@@ -1,0 +1,9 @@
+#!/bin/sh
+
+exec yt-dlp \
+  --format bestaudio/best \
+  --extract-audio \
+  --audio-format mp3 \
+  --audio-quality 0 \
+  --no-embed-subs \
+  "$@"

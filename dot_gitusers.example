@@ -1,0 +1,5 @@
+# Copy this file to ~/.gitusers.local and customize it per machine.
+
+[user "name"]
+	name = name
+	email = name@example.com

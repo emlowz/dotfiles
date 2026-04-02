@@ -1,0 +1,4 @@
+compile-bytecode = true
+
+[pip]
+strict = true

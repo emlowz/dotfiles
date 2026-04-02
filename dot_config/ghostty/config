@@ -1,0 +1,23 @@
+# Appearance
+font-size = 14
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-width = 120
+window-height = 32
+
+# Keep new tabs, windows, and splits in the same directory
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = sudo,ssh-env,ssh-terminfo
+
+# Misc
+copy-on-select = clipboard
+confirm-close-surface = true
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true

@@ -1,0 +1,40 @@
+# Prefer the best separate video and audio streams, falling back to a single
+# combined stream when a site does not expose separate formats.
+--format
+bv*+ba/b
+
+# Stable, readable filenames that avoid collisions across sites/playlists.
+--output
+"%(title).200B [%(id)s].%(ext)s"
+
+# Do not overwrite an existing output file in the current destination.
+--no-overwrites
+
+# Continue partially downloaded files when possible.
+--continue
+
+# Better resilience for long playlists and flaky segmented streams
+--concurrent-fragments
+4
+--retries
+infinite
+--fragment-retries
+infinite
+--retry-sleep
+http:exp=1:20
+--retry-sleep
+fragment:exp=1:20
+
+# Preserve useful metadata in the final media file
+--embed-metadata
+--embed-chapters
+--embed-thumbnail
+
+# Do not download separate subtitle sidecar files.
+--no-write-subs
+--no-write-auto-subs
+
+# Keep terminal output readable during large downloads
+--progress
+--progress-delta
+1
