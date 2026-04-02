@@ -1,0 +1,10 @@
+" Maintain selection when adjusting indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Clear search highlighting
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+" Navigate between wrapped lines
+nnoremap j gj
+nnoremap k gk

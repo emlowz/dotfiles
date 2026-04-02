@@ -1,0 +1,28 @@
+# Ghostty configuration managed by chezmoi.
+
+# Keep the terminal readable without assuming a specific font is installed.
+font-size = 14
+
+# Give the terminal content a little breathing room.
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+
+# Start at a practical size for coding.
+window-width = 120
+window-height = 32
+
+# Keep new tabs, windows, and splits in the same project directory.
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# Shell integration improves prompt tracking and close confirmation behavior.
+shell-integration = detect
+
+# Small quality-of-life defaults.
+copy-on-select = clipboard
+confirm-close-surface = true
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true

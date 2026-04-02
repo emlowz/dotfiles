@@ -1,0 +1,21 @@
+# NetHack configuration managed by chezmoi.
+
+# General quality-of-life options.
+OPTIONS=color,hilite_pet,lit_corridor,showexp,showscore,time
+OPTIONS=pickup,pickup_types:$!?/=+
+OPTIONS=rest_on_space,safe_pet,sortpack,verbose
+OPTIONS=mouse_support
+
+# Make menus and prompts easier to read.
+OPTIONS=menustyle:traditional
+
+# Autopickup rules: grab useful basics, skip noisy low-value items.
+AUTOPICKUP_EXCEPTION=">corpse"
+AUTOPICKUP_EXCEPTION=">glob"
+AUTOPICKUP_EXCEPTION=">worthless piece of colored glass"
+
+# Highlight item quality in menus when supported by the interface.
+MENUCOLOR=" blessed " = green
+MENUCOLOR=" holy water" = green
+MENUCOLOR=" cursed " = red
+MENUCOLOR=" unholy water" = red
