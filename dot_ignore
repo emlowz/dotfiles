@@ -1,0 +1,20 @@
+# Shared ignore patterns for tools that respect ~/.ignore.
+.DS_Store
+.direnv/
+.env
+.env.*
+.git/
+.jj/
+.next/
+.nuxt/
+.pnpm-store/
+.svelte-kit/
+.terraform/
+.venv/
+.vscode/
+coverage/
+dist/
+node_modules/
+target/
+tmp/
+vendor/

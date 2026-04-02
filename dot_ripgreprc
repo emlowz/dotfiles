@@ -1,0 +1,11 @@
+# ripgrep defaults.
+--smart-case
+--hidden
+--glob=!.git/
+--glob=!.jj/
+--glob=!node_modules/
+--glob=!dist/
+--glob=!coverage/
+--glob=!target/
+--glob=!.next/
+--glob=!.svelte-kit/
