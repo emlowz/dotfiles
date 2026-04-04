@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# Switch the current repo's Git identity using entries from ~/.gitusers.local.
+trim() {
+  printf '%s' "$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+}
+
+if [ "$#" -ne 1 ]; then
+  echo "usage: git user <name>" >&2
+  exit 1
+fi
+
+users_file="$HOME/.gitusers.local"
+example_file="$HOME/.gitusers.example"
+if [ ! -f "$users_file" ]; then
+  if [ -f "$example_file" ]; then
+    echo "git user: missing $users_file (copy $example_file to $users_file and customize it)" >&2
+  else
+    echo "git user: missing $users_file" >&2
+  fi
+  exit 1
+fi
+
+key=$(trim "$1" | tr '[:upper:]' '[:lower:]')
+if [ -z "$key" ]; then
+  echo "git user: name must not be empty" >&2
+  exit 1
+fi
+
+name=$(git config -f "$users_file" --get "user.$key.name")
+email=$(git config -f "$users_file" --get "user.$key.email")
+name=$(trim "$name")
+email=$(trim "$email")
+
+if [ -z "$name" ] || [ -z "$email" ]; then
+  echo "git user: unknown or incomplete user '$1'" >&2
+  exit 1
+fi
+
+git config user.name "$name" || exit 1
+git config user.email "$email" || exit 1
+
+echo "Switched git user to $name <$email>"

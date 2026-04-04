@@ -1,3 +1,4 @@
 .tmp/
 nvim.log
 dot_zshrc.local
+dot_gitusers.local

@@ -29,6 +29,7 @@ alias pip="pip3"
 # Tools
 export BUN_INSTALL="$HOME/.bun"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export PATH="$HOME/.local/bin:$PATH"
 
 # fzf
 if [[ -o interactive ]] && command -v fzf >/dev/null 2>&1; then

@@ -3,6 +3,7 @@
 [alias]
 	ac = !git add -A && git commit -m 'auto commit'
 	acp = !git add -A && git commit -m 'auto commit' && git push
+	user = "!\"$HOME/.local/bin/git-user\""
 [credential "https://github.com"]
 	helper =
 	helper = !gh auth git-credential
