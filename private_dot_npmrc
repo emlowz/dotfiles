@@ -1,0 +1,18 @@
+# Avoid installing brand-new package releases by default.
+# Set this to 0, or override with --min-release-age=0, when you need a fresh release.
+min-release-age=7
+
+# Keep installs on the official registry over TLS.
+registry=https://registry.npmjs.org/
+strict-ssl=true
+
+# Make dependency updates more deliberate and reproducible.
+package-lock=true
+save-exact=true
+
+# Keep vulnerability checks enabled and fail npm audit on moderate+ issues.
+audit=true
+audit-level=moderate
+
+# Reduce install noise.
+fund=false
