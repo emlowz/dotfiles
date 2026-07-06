@@ -2,3 +2,4 @@
 nvim.log
 dot_zshrc.local
 dot_gitusers.local
+dot_config/nvim/lazy-lock.json
