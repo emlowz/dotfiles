@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Add or remove packages here. Keep package names in apt format.
+packages=(
+  build-essential
+  ca-certificates
+  curl
+  fd-find
+  ffmpeg
+  fortune-mod
+  fzf
+  gh
+  git
+  git-lfs
+  htop
+  neovim
+  npm
+  python3
+  python3-pip
+  python3-venv
+  ripgrep
+  tmux
+  unzip
+  wl-clipboard
+  xclip
+  yt-dlp
+  zsh
+)
+
+usage() {
+  cat <<'EOF'
+usage: install-ubuntu-packages [options]
+
+Install apt packages used by this dotfiles setup.
+
+options:
+  -n, --dry-run     Print the apt commands without running them.
+  -y, --yes         Pass --yes to apt-get install.
+      --no-update   Skip apt-get update.
+  -h, --help        Show this help text.
+EOF
+}
+
+dry_run=0
+assume_yes=0
+run_update=1
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -n | --dry-run)
+      dry_run=1
+      shift
+      ;;
+    -y | --yes)
+      assume_yes=1
+      shift
+      ;;
+    --no-update)
+      run_update=0
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "install-ubuntu-packages: unknown option '$1'" >&2
+      usage >&2
+      exit 2
+      ;;
+  esac
+done
+
+if [ ! -r /etc/os-release ]; then
+  echo "install-ubuntu-packages: /etc/os-release not found; this script is for Ubuntu." >&2
+  exit 1
+fi
+
+# shellcheck disable=SC1091
+. /etc/os-release
+
+if [ "${ID:-}" != "ubuntu" ]; then
+  echo "install-ubuntu-packages: this script is for Ubuntu, but found '${ID:-unknown}'." >&2
+  exit 1
+fi
+
+sudo_cmd=()
+if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+  if ! command -v sudo >/dev/null 2>&1; then
+    echo "install-ubuntu-packages: sudo is required when not running as root." >&2
+    exit 1
+  fi
+  sudo_cmd=(sudo)
+fi
+
+install_flags=()
+if [ "$assume_yes" -eq 1 ]; then
+  install_flags=(--yes)
+fi
+
+print_command() {
+  printf '  '
+  printf '%q ' "$@"
+  printf '\n'
+}
+
+echo "Ubuntu packages to install:"
+printf '  %s\n' "${packages[@]}"
+
+if [ "$dry_run" -eq 1 ]; then
+  echo
+  echo "Dry run; would run:"
+  if [ "$run_update" -eq 1 ]; then
+    print_command "${sudo_cmd[@]}" apt-get update
+  fi
+  print_command "${sudo_cmd[@]}" apt-get install "${install_flags[@]}" "${packages[@]}"
+  exit 0
+fi
+
+if [ "$run_update" -eq 1 ]; then
+  "${sudo_cmd[@]}" apt-get update
+fi
+
+"${sudo_cmd[@]}" apt-get install "${install_flags[@]}" "${packages[@]}"

@@ -2,4 +2,9 @@
 .tmux.conf
 {{- end }}
 
+{{- $isUbuntu := and (eq .chezmoi.os "linux") (eq (index .chezmoi.osRelease "id") "ubuntu") }}
+{{- if not $isUbuntu }}
+.local/bin/install-ubuntu-packages
+{{- end }}
+
 .config/nvim/lazy-lock.json
