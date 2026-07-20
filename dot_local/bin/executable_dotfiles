@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec code "$(chezmoi source-path)"
