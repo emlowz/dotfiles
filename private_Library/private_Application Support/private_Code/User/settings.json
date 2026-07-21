@@ -1,0 +1,53 @@
+{
+  "editor.lineNumbers": "relative",
+  "editor.renderWhitespace": "none",
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "git.enableSmartCommit": true,
+  "redhat.telemetry.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "j"
+      ],
+      "after": [
+        "g",
+        "j"
+      ]
+    },
+    {
+      "before": [
+        "k"
+      ],
+      "after": [
+        "g",
+        "k"
+      ]
+    }
+  ],
+  "git.confirmSync": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  },
+  "jest.runMode": "on-save",
+  "git.inputValidation": true,
+  "[jinja-html]": {
+    "editor.autoIndent": "full",
+    "editor.defaultFormatter": "monosans.djlint"
+  },
+  "svelte.enable-ts-plugin": true,
+  "[nix]": {
+    "editor.defaultFormatter": "brettm12345.nixfmt-vscode"
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "claudeCode.preferredLocation": "panel",
+  "editor.minimap.enabled": false,
+  "python.analysis.typeCheckingMode": "standard",
+}
