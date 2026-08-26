@@ -1,9 +1,42 @@
 #!/bin/sh
 
+audio_format=mp3
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --source)
+      audio_format=best
+      shift
+      ;;
+    help | --help | -h)
+      cat <<'EOF'
+usage:
+  yta [--source] [yt-dlp options] URL...
+
+options:
+  --source    Preserve the best source audio codec instead of converting to MP3.
+EOF
+      exit 0
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [ "$audio_format" = mp3 ]; then
+  exec yt-dlp \
+    --format bestaudio/best \
+    --extract-audio \
+    --audio-format mp3 \
+    --audio-quality 0 \
+    --no-embed-subs \
+    "$@"
+fi
+
 exec yt-dlp \
   --format bestaudio/best \
   --extract-audio \
-  --audio-format mp3 \
-  --audio-quality 0 \
+  --audio-format best \
   --no-embed-subs \
   "$@"

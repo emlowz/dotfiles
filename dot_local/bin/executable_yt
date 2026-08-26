@@ -36,17 +36,18 @@ done
 if [ "$convert" -eq 1 ]; then
   if [ "$subtitles" -eq 1 ]; then
     exec yt-dlp \
-      --preset-alias mp4 \
+      --merge-output-format mp4 \
       --recode-video mp4 \
       --write-subs \
-      --sub-langs 'en.*,en,-live_chat' \
+      --write-auto-subs \
+      --sub-langs 'en' \
       --sub-format best \
       --embed-subs \
       "$@"
   fi
 
   exec yt-dlp \
-    --preset-alias mp4 \
+    --merge-output-format mp4 \
     --recode-video mp4 \
     "$@"
 fi
@@ -55,7 +56,8 @@ if [ "$subtitles" -eq 1 ]; then
   exec yt-dlp \
     --preset-alias mkv \
     --write-subs \
-    --sub-langs 'en.*,en,-live_chat' \
+    --write-auto-subs \
+    --sub-langs 'en' \
     --sub-format best \
     --embed-subs \
     "$@"
