@@ -13,6 +13,16 @@ bv*+ba/b
 # Continue partially downloaded files when possible.
 --continue
 
+# Always use IPv4 for outgoing connections.
+-4
+
+# Use YouTube's mobile-web client with an on-demand Proof-of-Origin token.
+# The provider is installed by the chezmoi bgutil setup script.
+--extractor-args
+youtube:player_client=mweb
+--extractor-args
+youtubepot-bgutilscript:server_home=~/.local/share/bgutil-ytdlp-pot-provider/server
+
 # Better resilience for long playlists and flaky segmented streams
 --concurrent-fragments
 4
