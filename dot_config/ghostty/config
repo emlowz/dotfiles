@@ -15,6 +15,10 @@ split-inherit-working-directory = true
 shell-integration = detect
 shell-integration-features = sudo,ssh-env,ssh-terminfo
 
+# Quick terminal (Control + Command + T)
+keybind = global:ctrl+cmd+t=toggle_quick_terminal
+quick-terminal-position = top
+
 # Misc
 copy-on-select = clipboard
 confirm-close-surface = true
