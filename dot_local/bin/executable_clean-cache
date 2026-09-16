@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+run_if_available() {
+  if command -v "$1" >/dev/null 2>&1; then
+    "$@"
+  fi
+}
+
+printf '\nDisk space before cleanup:\n'
+run_if_available df -h /
+
+run_if_available npm cache clean --force
+run_if_available uv cache clean
+run_if_available brew cleanup --prune=all
+
+# Prefer Python 3's pip, with standalone pip commands as fallbacks.
+if command -v python3 >/dev/null 2>&1 &&
+  python3 -m pip --version >/dev/null 2>&1; then
+  python3 -m pip cache purge
+elif command -v pip3 >/dev/null 2>&1; then
+  pip3 cache purge
+elif command -v pip >/dev/null 2>&1; then
+  pip cache purge
+fi
+
+printf '\nDisk space after cleanup:\n'
+run_if_available df -h /
