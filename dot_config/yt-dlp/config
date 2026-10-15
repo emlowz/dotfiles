@@ -1,7 +1,20 @@
-# Prefer the best separate video and audio streams, falling back to a single
-# combined stream when a site does not expose separate formats.
+# Keep the best SDR resolution and original frame rate. Unknown dynamic range
+# is allowed for sites that omit it; the compatibility processor checks the file.
 --format
-bv*+ba/b
+bv*[dynamic_range=?SDR]+ba/b[dynamic_range=?SDR]
+
+# Prefer compatible codecs at the same resolution/frame rate.
+--format-sort
+res,fps,vcodec:h264,acodec:aac
+
+# MKV is only an intermediate container. The local processor produces H.264
+# (8-bit 4:2:0) + AAC MP4, copying streams that already meet those requirements.
+# Unlike --recode-video mp4, it also checks codecs inside existing MP4 files.
+# Audio extraction and explicit other containers (yt --no-convert) bypass it.
+--merge-output-format
+mkv
+--use-postprocessor
+CompatibleMP4
 
 # Stable, readable filenames that avoid collisions across sites/playlists.
 --output

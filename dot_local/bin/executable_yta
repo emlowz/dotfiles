@@ -13,8 +13,11 @@ while [ "$#" -gt 0 ]; do
 usage:
   yta [--source] [yt-dlp options] URL...
 
+By default, save high-quality MP3 audio for Final Cut and common players.
+For video in MP4, use yt instead.
+
 options:
-  --source    Preserve the best source audio codec instead of converting to MP3.
+  --source    Preserve source audio (may not import into Final Cut).
 EOF
       exit 0
       ;;
@@ -27,6 +30,7 @@ done
 if [ "$audio_format" = mp3 ]; then
   exec yt-dlp \
     --format bestaudio/best \
+    --format-sort-reset \
     --extract-audio \
     --audio-format mp3 \
     --audio-quality 0 \
@@ -36,6 +40,7 @@ fi
 
 exec yt-dlp \
   --format bestaudio/best \
+  --format-sort-reset \
   --extract-audio \
   --audio-format best \
   --no-embed-subs \

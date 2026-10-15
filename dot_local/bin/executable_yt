@@ -19,8 +19,12 @@ usage:
   yt [--no-convert] [yt-dlp options] URL...
   yt [--no-convert] with-subtitles [yt-dlp options] URL...
 
+By default, save the best SDR video as H.264/AAC MP4 for Final Cut and players.
+Incompatible streams are converted; compatible streams are copied losslessly.
+Wait for post-processing to finish before importing the completed MP4.
+
 options:
-  --no-convert     Keep the old MKV behavior instead of making MP4 output.
+  --no-convert     Keep source codecs in MKV (may not import into Final Cut).
 
 subcommands:
   with-subtitles   Download English subtitles when available and embed them.
@@ -36,8 +40,6 @@ done
 if [ "$convert" -eq 1 ]; then
   if [ "$subtitles" -eq 1 ]; then
     exec yt-dlp \
-      --merge-output-format mp4 \
-      --recode-video mp4 \
       --write-subs \
       --write-auto-subs \
       --sub-langs 'en' \
@@ -47,13 +49,12 @@ if [ "$convert" -eq 1 ]; then
   fi
 
   exec yt-dlp \
-    --merge-output-format mp4 \
-    --recode-video mp4 \
     "$@"
 fi
 
 if [ "$subtitles" -eq 1 ]; then
   exec yt-dlp \
+    --format 'bv*+ba/b' \
     --preset-alias mkv \
     --write-subs \
     --write-auto-subs \
@@ -64,5 +65,6 @@ if [ "$subtitles" -eq 1 ]; then
 fi
 
 exec yt-dlp \
+  --format 'bv*+ba/b' \
   --preset-alias mkv \
   "$@"
